@@ -1,0 +1,14 @@
+{
+"coord": {"lon":-0.59,"lat":44.82},
+"weather":[{"id":801,"main":"Clouds","description":"few clouds","icon":"02d"}],
+"base":"stations",
+"main":{"temp":293.6,"pressure":1021,"humidity":83,"temp_min":293.15,"temp_max":294.15},
+"visibility":10000,
+"wind":{"speed":3.1,"deg":230},
+"clouds":{"all":20},
+"dt":1504598400,
+"sys":{"type":1,"id":5525,"message":0.0028,"country":"FR","sunrise":1504589387,"sunset":1504636269},
+"id":6432482,
+"name":"Talence",
+"cod":200
+}
