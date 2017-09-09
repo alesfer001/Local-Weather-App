@@ -218,6 +218,11 @@ $(document).ready(function(){
     }
 
     // Parse data and output html
+    var myarr = data.weather[0].description.split(" ");
+    for(var i=0; i<myarr.length; i++){
+      myarr[i] = myarr[i][0].toUpperCase() + myarr[i].slice(1);
+    }
+    var description = myarr.join(" ");
     var html = "";
     html += "<div class='fade-div'";
     html += "<h2>" + data.name + ", " + data.sys.country + "</h2>";
@@ -231,7 +236,7 @@ $(document).ready(function(){
     html += "<span class='fahrenheit'>" + KeltoFah(data.main.temp) + "</span>";
     html += "<a class='cel' href='javascript:void(0)'><i class='wi wi-celsius'></i></a>";
     html += " | <a class='fah' href='javascript:void(0)'><i class='wi wi-fahrenheit'></i></a></p>"
-    html += "<p>" + data.weather[0].description + "</p>";
+    html += "<p>" + description + "</p>";
     html += "</td> </tr> </table>";
     html += "<div class='city-name'><label for='city'>City: </label><br/><input id='city' placeholder='City Name'></div>";
     html += "</div>";
