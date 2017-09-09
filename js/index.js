@@ -10,50 +10,81 @@ $(document).ready(function(){
   navigator.geolocation.getCurrentPosition(function(position){
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
-    //"https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=c5f24736063fac2f3ce3833b59d92ab3"
-    $.getJSON("js/example_req.json", function(data){
+    $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=c5f24736063fac2f3ce3833b59d92ab3", function(data){
       htmlInput(data);
     });
   });
 
   function htmlInput(data) {
     //console.log(JSON.stringify(data));
-    // Choose icon depending on weather condition
+    // Choose icon and background depending on weather condition
+    var d = new Date();
+    var h = d.getHours();
     var weatherIcon = "";
     switch(data.weather[0].main){
       case "Thunderstorm":
       weatherIcon = "wi-thunderstorm";
-      $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/thunderstorm.jpg')");
+      if(h > 6 && h < 20){
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/thunderstorm-day.jpg')");
+      }
+      else {
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/thunderstorm-night.jpg')");
+      }
       $("body").css("background-size", "100%");
       $("h1").css("color", "#3d5afe");
       break;
       case "Drizzle":
       weatherIcon = "wi-sprinkle";
-      $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/drizzle.jpg')");
+      if(h > 6 && h < 20){
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/drizzle-day.jpg')");
+      }
+      else {
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/drizzle-night.jpg')");
+      }
       $("body").css("background-size", "100%");
       $("h1").css("color", "#3d5afe");
       break;
       case "Rain":
       weatherIcon = "wi-rain";
-      $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/rain.jpg')");
+      if(h > 6 && h < 20){
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/rain-day.jpg')");
+      }
+      else {
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/rain-night.jpg')");
+      }
       $("body").css("background-size", "100%");
       $("h1").css("color", "#3d5afe");
       break;
       case "Snow":
       weatherIcon = "wi-snow";
-      $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/snow.jpg')");
+      if(h > 6 && h < 20){
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/snow-day.jpg')");
+      }
+      else {
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/snow-night.jpg')");
+      }
       $("body").css("background-size", "100%");
       $("h1").css("color", "#3d5afe");
       break;
       case "Clear":
       weatherIcon = "wi-cloud";
-      $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/clear.jpg')");
+      if(h > 6 && h < 20){
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/clear-day.jpg')");
+      }
+      else {
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/clear-night.jpg')");
+      }
       $("body").css("background-size", "100%");
       $("h1").css("color", "#3d5afe");
       break;
       case "Clouds":
       weatherIcon = "wi-cloudy";
-      $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/clouds.jpg')");
+      if(h > 6 && h < 20){
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/clouds-day.jpg')");
+      }
+      else {
+        $("body").css("background", "linear-gradient(rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)),url('../img/clouds-night.jpg')");
+      }
       $("body").css("background-size", "100%");
       $("h1").css("color", "#3d5afe");
       break;
@@ -98,7 +129,6 @@ $(document).ready(function(){
       break;
     }
 
-    var d = new Date();
     // Get Hour Icon
     var hourIcon = "";
     switch(d.getHours()){
@@ -208,10 +238,10 @@ $(document).ready(function(){
 
     $(".weather").html(html);
     $(".fade-div").css("display", "none");
-    $(".fade-div").fadeIn(2000);
+    $(".fade-div").fadeIn(3500);
     $(".animated").css("position", "relative");
     $(".animated").animate({
-      top: 10
+      top: 0
     }, 2000);
     $(".weather-table").css("width", "100%");
     $(".wi-celsius, .wi-fahrenheit").css("font-size", "32px")
