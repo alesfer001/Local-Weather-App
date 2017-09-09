@@ -14,15 +14,23 @@ h1 {
 .weather {
   width: 70%;
   margin: auto;
-  text-align: center;
   background: linear-gradient(rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.7));
   border: 1px solid black;
   border-radius: 10px;
   height: 400px;
+}
+
+.fade-div {
+  text-align: center;
   font-size: 24px;
   text-shadow: 1px 1px grey;
   font-family: 'Roboto', sans-serif;
   color: black;
+  padding: 2%;
+}
+
+.animated {
+  top: -20px;
 }
 
 td {

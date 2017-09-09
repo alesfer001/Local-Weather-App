@@ -189,14 +189,14 @@ $(document).ready(function(){
 
     // Parse data and output html
     var html = "";
+    html += "<div class='fade-div'";
     html += "<h2>" + data.name + ", " + data.sys.country + "</h2>";
-    $("h2").fadeIn();
     html += "<table class='weather-table'> <tr> <td>";
-    html += "<i class='wi " + hourIcon + "'></i>";
+    html += "<i class='wi animated " + hourIcon + "'></i>";
     html += "<p>" + day + " " + d.getHours() + ":" + minutes;
     html += "</td> <td>";
     html += "<div class='weather-temp'>";
-    html += "<p><i class='wi " + weatherIcon + "'></i>"
+    html += "<p><i class='wi animated " + weatherIcon + "'></i>"
     html += "<span class='celsius'>" + KeltoCel(data.main.temp) + "</span>";
     html += "<span class='fahrenheit'>" + KeltoFah(data.main.temp) + "</span>";
     html += "<a class='cel' href='javascript:void(0)'><i class='wi wi-celsius'></i></a>";
@@ -204,8 +204,15 @@ $(document).ready(function(){
     html += "<p>" + data.weather[0].description + "</p>";
     html += "</td> </tr> </table>";
     html += "<div class='city-name'><label for='city'>City: </label><br/><input id='city' placeholder='City Name'></div>";
+    html += "</div>";
 
     $(".weather").html(html);
+    $(".fade-div").css("display", "none");
+    $(".fade-div").fadeIn(2000);
+    $(".animated").css("position", "relative");
+    $(".animated").animate({
+      top: 10
+    }, 2000);
     $(".weather-table").css("width", "100%");
     $(".wi-celsius, .wi-fahrenheit").css("font-size", "32px")
     $("td").css("width", "50%");
