@@ -255,13 +255,13 @@ $(document).ready(function(){
 
     $(".fahrenheit").hide();
     $(".cel").click(function(){
-      $(".celsius").css("display","inline-block");
+      $(".celsius").fadeIn(1000);
       $(".wi-celsius").css("color", "white");
       $(".fahrenheit").css("display","none");
       $(".wi-fahrenheit").css("color", "#3d5afe");
     });
     $(".fah").click(function(){
-      $(".fahrenheit").css("display","inline-block");
+      $(".fahrenheit").fadeIn(1000);
       $(".wi-fahrenheit").css("color", "white");
       $(".celsius").css("display","none");
       $(".wi-celsius").css("color", "#3d5afe");
