@@ -11,6 +11,16 @@ h1 {
   font-family: 'Roboto', sans-serif;
 }
 
+@media only screen and (max-width: 768px) {
+	h1 {
+		font-size: 24px;
+    text-shadow: 1px 1px black;
+	}
+  h2 {
+    font-size: 16px;
+  }
+}
+
 .weather {
   width: 70%;
   margin: auto;
@@ -18,6 +28,15 @@ h1 {
   border: 1px solid black;
   border-radius: 10px;
   height: 400px;
+}
+
+@media only screen and (max-width: 768px) {
+	.weather {
+    width: 90%;
+    height: auto;
+    position: relative;
+    top: 80px;
+  }
 }
 
 .fade-div {
@@ -29,6 +48,12 @@ h1 {
   padding: 2%;
 }
 
+@media only screen and (max-width: 768px) {
+	.fade-div {
+    font-size: 16px;
+  }
+}
+
 .animated {
   top: -30px;
 }
@@ -37,7 +62,7 @@ td {
   padding: 5%;
 }
 
-.wi{
+.wi {
   font-size: 70px;
   padding: 2%;
 }
@@ -46,6 +71,14 @@ input {
   font-size: 18px;
   border-radius: 5px;
   padding: 0.5%;
+}
+
+@media only screen and (max-width: 768px) {
+	input {
+    font-size: 16px;
+    padding: 1%;
+    margin: 1%;
+  }
 }
 
 .fahrenheit {

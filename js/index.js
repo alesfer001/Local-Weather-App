@@ -224,7 +224,7 @@ $(document).ready(function(){
     }
     var description = myarr.join(" ");
     var html = "";
-    html += "<div class='fade-div'";
+    html += "<div class='fade-div'>";
     html += "<h2>" + data.name + ", " + data.sys.country + "</h2>";
     html += "<table class='weather-table'> <tr> <td>";
     html += "<i class='wi animated " + hourIcon + "'></i>";
@@ -317,6 +317,16 @@ $(document).ready(function(){
       minLength: 3,
       source: city_array
     });
+
+    if ($(window).width()<768) {
+      $(".wi").css("font-size", "32px");
+      $(".wi").css("text-shadow", "1px 1px black");
+      $(".wi-celsius, .wi-fahrenheit").css("font-size", "18px");
+      $("body").css("background-size", "800px 750px");
+      $("body").css("background-repeat", "no-repeat");
+      $("body").css("background-position", "center center");
+      $("body").css("background-attachement", "fixed");
+    }
   }
 
   function KeltoCel(Kel){
