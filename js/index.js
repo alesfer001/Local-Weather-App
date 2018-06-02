@@ -11,15 +11,28 @@ $(document).ready(function(){
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     $.getJSON("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&APPID=c5f24736063fac2f3ce3833b59d92ab3", function(data){
-      htmlInput(data);
+      getTime(data);
     });
   });
 
-  function htmlInput(data) {
-    //console.log(JSON.stringify(data));
-    // Choose icon and background depending on weather condition
+  // Get time of current chosen city
+  function getTime(data) {
+    var loc = data.coord.lat + ", " + data.coord.lon;
     var d = new Date();
-    var h = d.getHours();
+    var timestamp = d.getTime()/1000 + d.getTimezoneOffset() * 60;
+    var apikey = 'AIzaSyCMdNL_5IOaIdGxWNbTFEi-Az9VquKLNsc';
+    $.getJSON("https://maps.googleapis.com/maps/api/timezone/json?location=" + loc + "&timestamp=" + timestamp + "&key=" + apikey, d = function(ret){
+      if (ret.status == 'OK'){
+        var offsets = ret.dstOffset * 1000 + ret.rawOffset * 1000;
+        var localdate = new Date(timestamp * 1000 + offsets);
+        htmlInput(data, localdate);
+      }
+    });
+  }
+
+  function htmlInput(data, cday) {
+    var h = cday.getHours();
+    // Choose icon and background depending on weather condition
     var weatherIcon = "";
     switch(data.weather[0].main){
       case "Thunderstorm":
@@ -131,7 +144,7 @@ $(document).ready(function(){
 
     // Get Hour Icon
     var hourIcon = "";
-    switch(d.getHours()){
+    switch(h){
       case 0:
       case 12:
       hourIcon = "wi-time-12";
@@ -184,7 +197,7 @@ $(document).ready(function(){
 
     // Get Day
     var day = "";
-    switch(d.getDay()){
+    switch(day){
       case 0:
       day = "Sunday";
       break;
@@ -210,11 +223,11 @@ $(document).ready(function(){
 
     // Minutes
     var minutes = "";
-    if(d.getMinutes() < 10){
-      minutes = "0" + d.getMinutes();
+    if(cday.getMinutes() < 10){
+      minutes = "0" + cday.getMinutes();
     }
     else{
-      minutes = d.getMinutes().toString();
+      minutes = cday.getMinutes().toString();
     }
 
     // Parse data and output html
@@ -228,7 +241,7 @@ $(document).ready(function(){
     html += "<h2>" + data.name + ", " + data.sys.country + "</h2>";
     html += "<table class='weather-table'> <tr> <td>";
     html += "<i class='wi animated " + hourIcon + "'></i>";
-    html += "<p>" + day + " " + d.getHours() + ":" + minutes;
+    html += "<p>" + day + " " + cday.getHours() + ":" + minutes;
     html += "</td> <td>";
     html += "<div class='weather-temp'>";
     html += "<p><i class='wi animated " + weatherIcon + "'></i>"
@@ -267,32 +280,6 @@ $(document).ready(function(){
       $(".wi-celsius").css("color", "#3d5afe");
     });
 
-    switch(data.weather[0].main){
-      case "Thunderstorm":
-      $(".wi").css("color", "#3d5afe");
-      $(".wi").css("text-shadow", "2px 2px black");
-      break;
-      case "Drizzle":
-      $(".wi").css("color", "#3d5afe");
-      $(".wi").css("text-shadow", "2px 2px black");
-      break;
-      case "Rain":
-      $(".wi").css("color", "#3d5afe");
-      $(".wi").css("text-shadow", "2px 2px black");
-      break;
-      case "Snow":
-      $(".wi").css("color", "#3d5afe");
-      $(".wi").css("text-shadow", "2px 2px black");
-      break;
-      case "Clear":
-      $(".wi").css("color", "#3d5afe");
-      $(".wi").css("text-shadow", "2px 2px black");
-      break;
-      case "Clouds":
-      $(".wi").css("color", "#3d5afe");
-      $(".wi").css("text-shadow", "2px 2px black");
-      break;
-    }
     $(".wi").css("color", "#3d5afe");
     $(".wi").css("text-shadow", "2px 2px black");
 
@@ -307,7 +294,7 @@ $(document).ready(function(){
     $("#city").keypress(function(e){
       if(e.keyCode == 13){
         $.getJSON("https://api.openweathermap.org/data/2.5/weather?q=" + $("#city").val() + "&APPID=c5f24736063fac2f3ce3833b59d92ab3", function(data){
-          htmlInput(data);
+          getTime(data);
         })
       }
     });
